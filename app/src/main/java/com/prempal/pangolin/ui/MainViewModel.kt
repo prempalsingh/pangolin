@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.prempal.pangolin.data.Article
 import com.prempal.pangolin.data.ArticleRepository
+import com.prempal.pangolin.utils.Event
 import com.prempal.pangolin.utils.rx.SchedulerProvider
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
@@ -25,6 +26,9 @@ class MainViewModel(
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
+
+    private val _openArticleEvent = MutableLiveData<Event<String>>()
+    val openArticleEvent: LiveData<Event<String>> = _openArticleEvent
 
     private var page = 1
 
@@ -76,7 +80,9 @@ class MainViewModel(
     }
 
     fun onHeadlineClick(position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        _items.value?.get(position)?.url?.takeIf { it.isNotBlank() }?.let {
+            _openArticleEvent.postValue(Event(it))
+        }
     }
 
     private fun fetchArticles() {

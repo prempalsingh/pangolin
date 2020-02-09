@@ -1,6 +1,7 @@
 package com.prempal.pangolin.di.module
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.lifecycle.ViewModelProvider
 import com.prempal.pangolin.data.ArticleRepository
 import com.prempal.pangolin.ui.MainViewModel
@@ -34,4 +35,6 @@ class ActivityModule(private val activity: AppCompatActivity) {
                 )
             }).get(MainViewModel::class.java)
 
+    @Provides
+    fun provideCustomChromeTabIntent(): CustomTabsIntent = CustomTabsIntent.Builder().build()
 }

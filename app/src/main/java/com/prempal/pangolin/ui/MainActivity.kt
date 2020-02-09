@@ -1,9 +1,13 @@
 package com.prempal.pangolin.ui
 
+import android.content.ActivityNotFoundException
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +25,9 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var adapter: HeadlineAdapter
+
+    @Inject
+    lateinit var customTabsIntent: CustomTabsIntent
 
     lateinit var progressBar: ProgressBar
 
@@ -68,6 +75,16 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.loading.observe(this, Observer {
             progressBar.visibility = if (it) View.VISIBLE else View.GONE
+        })
+
+        viewModel.openArticleEvent.observe(this, Observer {
+            it.getContentIfNotHandled()?.let { url ->
+                try {
+                    customTabsIntent.launchUrl(this, Uri.parse(url))
+                } catch (ex: ActivityNotFoundException) {
+                    Toast.makeText(this, "Unable to open article", Toast.LENGTH_SHORT).show()
+                }
+            }
         })
     }
 }

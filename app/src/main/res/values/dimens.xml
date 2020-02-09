@@ -6,4 +6,6 @@
 
     <dimen name="headline_iv_height">160dp</dimen>
     <dimen name="headline_tv_padding">4dp</dimen>
+
+    <dimen name="progressbar_height">8dp</dimen>
 </resources>

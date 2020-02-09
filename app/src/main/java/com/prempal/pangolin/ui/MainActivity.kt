@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                         && itemCount > 0
                         && itemCount == findLastVisibleItemPosition() + 1
                     ) {
-                        //TODO: load more
+                        viewModel.onLoadMore()
                     }
                 }
             }

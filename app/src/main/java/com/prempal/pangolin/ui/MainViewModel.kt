@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.prempal.pangolin.data.Article
 import com.prempal.pangolin.data.ArticleRepository
+import com.prempal.pangolin.data.PAGE_SIZE
 import com.prempal.pangolin.utils.Event
 import com.prempal.pangolin.utils.rx.SchedulerProvider
 import io.reactivex.Single
@@ -31,6 +32,7 @@ class MainViewModel(
     val openArticleEvent: LiveData<Event<String>> = _openArticleEvent
 
     private var page = 1
+    private var loadMoreEnabled = false
 
     init {
         compositeDisposable.add(articleRepository.getArticles()
@@ -68,6 +70,8 @@ class MainViewModel(
                 }
                 .subscribe(
                     {
+                        loadMoreEnabled = it > page * PAGE_SIZE
+                        page++
                         _loading.postValue(false)
                     },
                     {
@@ -83,6 +87,10 @@ class MainViewModel(
         _items.value?.get(position)?.url?.takeIf { it.isNotBlank() }?.let {
             _openArticleEvent.postValue(Event(it))
         }
+    }
+
+    fun onLoadMore() {
+        if (_loading.value !== null && _loading.value == false && loadMoreEnabled) fetchArticles()
     }
 
     private fun fetchArticles() {

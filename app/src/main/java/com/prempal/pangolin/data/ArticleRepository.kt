@@ -22,3 +22,5 @@ class ArticleRepository @Inject constructor(
     fun insertArticles(articles: List<Article>) = database.articleDao().insertArticles(articles)
 
 }
+
+const val PAGE_SIZE = 20

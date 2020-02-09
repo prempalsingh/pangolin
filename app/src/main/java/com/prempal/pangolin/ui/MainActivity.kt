@@ -1,8 +1,10 @@
 package com.prempal.pangolin.ui
 
 import android.os.Bundle
+import android.view.View
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.prempal.pangolin.PangolinApplication
@@ -60,6 +62,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupObservers() {
+        viewModel.items.observe(this, Observer {
+            adapter.submitList(it)
+        })
 
+        viewModel.loading.observe(this, Observer {
+            progressBar.visibility = if (it) View.VISIBLE else View.GONE
+        })
     }
 }

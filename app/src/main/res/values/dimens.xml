@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_view_margin">8dp</dimen>
+    <dimen name="card_view_corner_radius">2dp</dimen>
+    <dimen name="card_view_elevation">2dp</dimen>
+
+    <dimen name="headline_iv_height">160dp</dimen>
+    <dimen name="headline_tv_padding">4dp</dimen>
+</resources>

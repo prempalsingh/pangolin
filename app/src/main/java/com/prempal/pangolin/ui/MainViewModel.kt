@@ -75,6 +75,10 @@ class MainViewModel(
         fetchArticles()
     }
 
+    fun onHeadlineClick(position: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     private fun fetchArticles() {
         paginator.onNext(page)
     }

@@ -8,7 +8,7 @@ import javax.inject.Inject
 /**
  * Created by prempal on 2020-02-09.
  */
-class HeadlinesRepository @Inject constructor(
+class ArticleRepository @Inject constructor(
     private val apiService: ApiService,
     private val database: NewsDatabase
 ) {

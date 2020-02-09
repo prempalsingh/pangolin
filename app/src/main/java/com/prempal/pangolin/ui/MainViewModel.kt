@@ -54,7 +54,7 @@ class MainViewModel(
                     return@concatMapSingle articleRepository
                         .fetchArticles(page)
                         .flatMap {
-                            if (it.status == "ok") {
+                            if (it.isSuccess()) {
                                 if (page == 1) {
                                     articleRepository.deleteAllArticles()
                                 }

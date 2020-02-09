@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.lifecycle.Observer
@@ -77,14 +78,24 @@ class MainActivity : AppCompatActivity() {
             progressBar.visibility = if (it) View.VISIBLE else View.GONE
         })
 
+        viewModel.toastEvent.observe(this, Observer {
+            it.getContentIfNotHandled()?.let {
+                showToast(it)
+            }
+        })
+
         viewModel.openArticleEvent.observe(this, Observer {
             it.getContentIfNotHandled()?.let { url ->
                 try {
                     customTabsIntent.launchUrl(this, Uri.parse(url))
                 } catch (ex: ActivityNotFoundException) {
-                    Toast.makeText(this, "Unable to open article", Toast.LENGTH_SHORT).show()
+                    showToast(R.string.error_opening_article)
                 }
             }
         })
+    }
+
+    private fun showToast(@StringRes int: Int) {
+        Toast.makeText(this, getString(int), Toast.LENGTH_SHORT).show()
     }
 }

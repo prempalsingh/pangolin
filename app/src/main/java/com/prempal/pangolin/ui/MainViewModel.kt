@@ -3,6 +3,7 @@ package com.prempal.pangolin.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.prempal.pangolin.R
 import com.prempal.pangolin.data.Article
 import com.prempal.pangolin.data.ArticleRepository
 import com.prempal.pangolin.data.PAGE_SIZE
@@ -30,6 +31,9 @@ class MainViewModel(
 
     private val _openArticleEvent = MutableLiveData<Event<String>>()
     val openArticleEvent: LiveData<Event<String>> = _openArticleEvent
+
+    private val _toastEvent = MutableLiveData<Event<Int>>()
+    val toastEvent: LiveData<Event<Int>> = _toastEvent
 
     private var page = 1
     private var loadMoreEnabled = false
@@ -66,6 +70,7 @@ class MainViewModel(
                         .doOnError {
                             it.printStackTrace()
                             _loading.postValue(false)
+                            _toastEvent.postValue(Event(R.string.error_fetching_headlines))
                         }
                 }
                 .subscribe(

@@ -15,6 +15,9 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     @Inject
+    lateinit var viewModel: MainViewModel
+
+    @Inject
     lateinit var adapter: HeadlineAdapter
 
     lateinit var progressBar: ProgressBar

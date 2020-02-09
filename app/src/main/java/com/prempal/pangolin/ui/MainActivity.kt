@@ -1,7 +1,8 @@
-package com.prempal.pangolin
+package com.prempal.pangolin.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.prempal.pangolin.R
 
 class MainActivity : AppCompatActivity() {
 

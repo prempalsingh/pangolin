@@ -6,6 +6,10 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+def secretsFile = rootProject.file("secret.properties");
+def secrets = new Properties()
+secrets.load(new FileInputStream(secretsFile))
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -16,6 +20,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "ApiKey", secrets['apikey'])
     }
     buildTypes {
         release {

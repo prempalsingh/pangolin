@@ -27,8 +27,8 @@ jobs:
     # Runs a set of commands using the runners shell
     - name: Run a multi-line script
       run: |
-        BRANCH=$(echo ${GITHUB_REF#refs/heads/})
-        echo ${{ github.head_ref || BRANCH }}
+        BRANCH=$(( GITHUB_HEAD_REF ? GITHUB_HEAD_REF : $(echo ${GITHUB_REF#refs/heads/}) ))  
+        echo $BRANCH
         echo ${{ github.ref }}
         echo ${{ github.head_ref }}
         echo ${{ github.base_ref }}

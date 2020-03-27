@@ -29,6 +29,7 @@ jobs:
       run: |
         [ -z "$GITHUB_HEAD_REF" ] && SERVER_LOGIN=push || SERVER_LOGIN=pr
         echo $SERVER_LOGIN
+        echo "hello"
         echo ${{ github.ref }}
         echo ${{ github.head_ref }}
         echo ${{ github.base_ref }}

@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.prempal.pangolin.PangolinApplication
 import com.prempal.pangolin.R
-import com.prempal.pangolin.di.component.DaggerActivityComponent
 import com.prempal.pangolin.di.module.ActivityModule
 import com.prempal.pangolin.ui.rv.HeadlineAdapter
 import javax.inject.Inject
@@ -42,11 +41,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun inject() {
-        DaggerActivityComponent
-            .builder()
-            .applicationComponent((application as PangolinApplication).appComponent)
-            .activityModule(ActivityModule(this))
-            .build()
+        (application as PangolinApplication).appComponent
+            .getActivityComponent(ActivityModule(this))
             .inject(this)
     }
 

@@ -12,10 +12,9 @@ import androidx.browser.customtabs.CustomTabsIntent
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.prempal.pangolin.PangolinApplication
 import com.prempal.pangolin.R
-import com.prempal.pangolin.di.module.ActivityModule
 import com.prempal.pangolin.ui.rv.HeadlineAdapter
+import dagger.android.AndroidInjection
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -32,18 +31,12 @@ class MainActivity : AppCompatActivity() {
     lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState)
-        inject()
         setContentView(R.layout.activity_main)
         progressBar = findViewById(R.id.progress_bar)
         setupRecyclerView()
         setupObservers()
-    }
-
-    private fun inject() {
-        (application as PangolinApplication).appComponent
-            .getActivityComponent(ActivityModule(this))
-            .inject(this)
     }
 
     private fun setupRecyclerView() {

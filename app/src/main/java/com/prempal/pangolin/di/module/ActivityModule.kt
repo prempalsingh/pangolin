@@ -1,9 +1,9 @@
 package com.prempal.pangolin.di.module
 
-import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.lifecycle.ViewModelProvider
 import com.prempal.pangolin.data.ArticleRepository
+import com.prempal.pangolin.ui.MainActivity
 import com.prempal.pangolin.ui.MainViewModel
 import com.prempal.pangolin.utils.ViewModelProviderFactory
 import com.prempal.pangolin.utils.rx.SchedulerProvider
@@ -16,10 +16,11 @@ import io.reactivex.processors.PublishProcessor
  * Created by prempal on 2020-02-09.
  */
 @Module
-class ActivityModule(private val activity: AppCompatActivity) {
+class ActivityModule {
 
     @Provides
     fun provideMainViewModel(
+        activity: MainActivity,
         articleRepository: ArticleRepository,
         schedulerProvider: SchedulerProvider,
         compositeDisposable: CompositeDisposable

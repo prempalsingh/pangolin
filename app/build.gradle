@@ -23,6 +23,12 @@ android {
 
         buildConfigField("String", "ApiKey", secrets['apikey'])
     }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
     buildTypes {
         release {
             minifyEnabled false

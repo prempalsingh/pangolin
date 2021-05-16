@@ -38,7 +38,7 @@ dependencies {
     implementation(deps.androidx.coreKtx)
     implementation(deps.androidx.appCompat)
     implementation(deps.androidx.design)
-    implementation(deps.androidx.constraintLayout)
+    implementation(deps.contour)
 
     testImplementation(deps.test.jUnit)
     androidTestImplementation(deps.test.android.jUnitExt)

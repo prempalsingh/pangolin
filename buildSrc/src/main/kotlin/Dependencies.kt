@@ -12,7 +12,6 @@ object deps {
         const val coreKtx = "androidx.core:core-ktx:1.3.2"
         const val appCompat = "androidx.appcompat:appcompat:1.2.0"
         const val design = "com.google.android.material:material:1.3.0"
-        const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
     }
 
     object test {
@@ -23,4 +22,6 @@ object deps {
 
         const val jUnit = "junit:junit:4.13"
     }
+
+    const val contour = "app.cash.contour:contour:1.1.0"
 }

@@ -39,6 +39,8 @@ dependencies {
     implementation(deps.androidx.appCompat)
     implementation(deps.androidx.design)
     implementation(deps.contour)
+    implementation(deps.androidx.navigationFragment)
+    implementation(deps.androidx.navigationUi)
 
     testImplementation(deps.test.jUnit)
     androidTestImplementation(deps.test.android.jUnitExt)

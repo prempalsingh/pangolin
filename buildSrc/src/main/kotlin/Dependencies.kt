@@ -12,6 +12,8 @@ object deps {
         const val coreKtx = "androidx.core:core-ktx:1.3.2"
         const val appCompat = "androidx.appcompat:appcompat:1.2.0"
         const val design = "com.google.android.material:material:1.3.0"
+        const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:2.3.5"
+        const val navigationUi = "androidx.navigation:navigation-ui-ktx:2.3.5"
     }
 
     object test {

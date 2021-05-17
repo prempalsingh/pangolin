@@ -1,12 +1,14 @@
 package com.prempal.pangolin
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.TextView
 import com.squareup.contour.ContourLayout
 
-class HelloWorldView(context: Context) : ContourLayout(context) {
+@SuppressLint("ViewConstructor")
+class HelloWorldView(context: Context, text: String = "Hello World") : ContourLayout(context) {
     private val textView = TextView(context).apply {
-        text = "Hello World"
+        this.text = text
         textSize = 18f
     }
 

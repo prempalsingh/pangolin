@@ -16,6 +16,13 @@ object deps {
         const val navigationUi = "androidx.navigation:navigation-ui-ktx:2.3.5"
     }
 
+    object hilt {
+        private const val version = "2.35"
+        const val gradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:$version"
+        const val android = "com.google.dagger:hilt-android:$version"
+        const val compiler = "com.google.dagger:hilt-android-compiler:$version"
+    }
+
     object test {
         object android {
             const val jUnitExt = "androidx.test.ext:junit:1.1.2"

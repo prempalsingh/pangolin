@@ -2,7 +2,10 @@ import java.io.FileInputStream
 import java.util.Properties
 
 val secrets = Properties()
-secrets.load(FileInputStream(rootProject.file("secret.properties")))
+val secretsFile = rootProject.file("secret.properties")
+if (secretsFile.exists()) {
+    secrets.load(FileInputStream(secretsFile))
+}
 
 plugins {
     id("com.android.application")
@@ -24,13 +27,19 @@ android {
 
         testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
 
-        buildConfigField("String", "API_KEY", secrets.getProperty("apikey"))
+        buildConfigField(
+            "String", "API_KEY",
+            secrets.getProperty("apikey", "\"PLACEHOLDER\"")
+        )
     }
 
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {

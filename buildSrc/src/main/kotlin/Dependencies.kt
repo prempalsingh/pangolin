@@ -23,6 +23,12 @@ object deps {
         const val compiler = "com.google.dagger:hilt-android-compiler:$version"
     }
 
+    object network {
+        private const val version = "2.9.0"
+        const val retrofit = "com.squareup.retrofit2:retrofit:$version"
+        const val moshiConverter = "com.squareup.retrofit2:converter-moshi:$version"
+    }
+
     object test {
         object android {
             const val jUnitExt = "androidx.test.ext:junit:1.1.2"

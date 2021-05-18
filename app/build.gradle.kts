@@ -1,3 +1,9 @@
+import java.io.FileInputStream
+import java.util.Properties
+
+val secrets = Properties()
+secrets.load(FileInputStream(rootProject.file("secret.properties")))
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -17,6 +23,8 @@ android {
         versionName("1.0")
 
         testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
+
+        buildConfigField("String", "API_KEY", secrets.getProperty("apikey"))
     }
 
     buildTypes {
@@ -46,6 +54,9 @@ dependencies {
 
     implementation(deps.hilt.android)
     kapt(deps.hilt.compiler)
+
+    implementation(deps.network.retrofit)
+    implementation(deps.network.moshiConverter)
 
     testImplementation(deps.test.jUnit)
     androidTestImplementation(deps.test.android.jUnitExt)

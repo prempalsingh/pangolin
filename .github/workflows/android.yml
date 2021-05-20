@@ -23,11 +23,21 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
     - name: Assemble app
       run: ./gradlew assemble
     - name: Run tests
       run: ./gradlew test
     - name: Ktlint
       run: ./gradlew ktlintCheck
+
+  android_test:
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Instrumentation Tests
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 29
+        script: ./gradlew connectedAndroidTest

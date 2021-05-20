@@ -1,4 +1,4 @@
-package com.prempal.pangolin.api
+package com.prempal.pangolin.data.remote.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory

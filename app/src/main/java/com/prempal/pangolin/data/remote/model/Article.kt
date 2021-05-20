@@ -1,4 +1,4 @@
-package com.prempal.pangolin.api
+package com.prempal.pangolin.data.remote.model
 
 import com.squareup.moshi.Json
 

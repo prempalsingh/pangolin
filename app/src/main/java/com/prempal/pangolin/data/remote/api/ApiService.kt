@@ -1,6 +1,7 @@
-package com.prempal.pangolin.api
+package com.prempal.pangolin.data.remote.api
 
 import com.prempal.pangolin.BuildConfig
+import com.prempal.pangolin.data.remote.model.NewsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

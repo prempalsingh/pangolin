@@ -1,7 +1,6 @@
-package com.prempal.pangolin
+package com.prempal.pangolin.topnews
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class TopNewsFragment : Fragment() {
 
+    private lateinit var topNewsView: TopNewsView
     private val viewModel: TopNewsViewModel by viewModels()
 
     override fun onCreateView(
@@ -19,7 +19,8 @@ class TopNewsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return HelloWorldView(requireContext(), getString(R.string.top_news))
+        topNewsView = TopNewsView(requireContext())
+        return topNewsView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,7 +31,7 @@ class TopNewsFragment : Fragment() {
 
     private fun subscribeToViewModel() {
         viewModel.state.observe(viewLifecycleOwner) {
-            Log.d("TopNewsViewState", it.toString())
+            topNewsView.setLayoutState(it)
         }
     }
 }

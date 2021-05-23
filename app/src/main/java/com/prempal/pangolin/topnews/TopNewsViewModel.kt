@@ -1,4 +1,4 @@
-package com.prempal.pangolin
+package com.prempal.pangolin.topnews
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

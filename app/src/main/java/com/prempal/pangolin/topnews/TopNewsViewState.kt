@@ -1,4 +1,4 @@
-package com.prempal.pangolin
+package com.prempal.pangolin.topnews
 
 import com.prempal.pangolin.data.remote.model.Article
 

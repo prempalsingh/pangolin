@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/top_dest"
-        android:name="com.prempal.pangolin.TopNewsFragment" />
+        android:name="com.prempal.pangolin.topnews.TopNewsFragment" />
     <fragment
         android:id="@+id/saved_dest"
         android:name="com.prempal.pangolin.SavedNewsFragment" />

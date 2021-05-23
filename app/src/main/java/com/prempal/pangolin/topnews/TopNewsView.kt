@@ -1,5 +1,6 @@
 package com.prempal.pangolin.topnews
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.Button
 import android.widget.ProgressBar
@@ -10,11 +11,10 @@ import com.prempal.pangolin.R
 import com.prempal.pangolin.utils.visibleIf
 import com.squareup.contour.ContourLayout
 
-class TopNewsView(context: Context) : ContourLayout(context) {
+@SuppressLint("ViewConstructor")
+class TopNewsView(context: Context, onRetryClick: () -> Unit) : ContourLayout(context) {
 
     private val progressBar = ProgressBar(context)
-
-    // TODO: 24/05/21 Handle click of button
     private val errorButton = Button(context).apply {
         text = context.getString(R.string.retry)
     }
@@ -38,6 +38,10 @@ class TopNewsView(context: Context) : ContourLayout(context) {
             x = centerHorizontallyTo { parent.centerX() },
             y = centerVerticallyTo { parent.centerY() }
         )
+
+        errorButton.setOnClickListener {
+            onRetryClick()
+        }
     }
 
     fun setLayoutState(state: TopNewsViewState) {

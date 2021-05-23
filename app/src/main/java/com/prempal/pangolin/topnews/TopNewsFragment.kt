@@ -19,7 +19,9 @@ class TopNewsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        topNewsView = TopNewsView(requireContext())
+        topNewsView = TopNewsView(requireContext()) {
+            viewModel.retryClicked()
+        }
         return topNewsView
     }
 

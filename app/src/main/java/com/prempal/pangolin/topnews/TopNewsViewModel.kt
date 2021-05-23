@@ -20,6 +20,10 @@ class TopNewsViewModel @Inject constructor(private val repo: NewsRepository) : V
         fetchNewsArticles()
     }
 
+    fun retryClicked() {
+        fetchNewsArticles()
+    }
+
     private fun fetchNewsArticles() {
         viewModelScope.launch {
             _state.value = TopNewsViewState.Loading

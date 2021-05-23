@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TopNewsFragment : Fragment() {
 
     private lateinit var topNewsView: TopNewsView
-    private val viewModel: TopNewsViewModel by viewModels()
+    private val viewModel: TopNewsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

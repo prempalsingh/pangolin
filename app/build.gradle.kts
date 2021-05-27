@@ -71,6 +71,7 @@ dependencies {
     testImplementation(deps.test.mockk)
     testImplementation(deps.test.truth)
     testImplementation(deps.kotlin.coroutinesTest)
+    testImplementation(deps.test.coreTesting)
 
     androidTestImplementation(deps.test.android.jUnitExt)
     androidTestImplementation(deps.test.android.espressoCore)

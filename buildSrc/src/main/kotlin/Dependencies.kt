@@ -39,6 +39,7 @@ object deps {
         const val jUnit = "junit:junit:4.13"
         const val mockk = "io.mockk:mockk:1.11.0"
         const val truth = "com.google.truth:truth:1.1.2"
+        const val coreTesting = "androidx.arch.core:core-testing:2.1.0"
     }
 
     const val contour = "app.cash.contour:contour:1.1.0"

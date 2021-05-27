@@ -12,7 +12,7 @@ class TopNewsService @Inject constructor(
     override suspend fun fetchNewsArticles(): Response<List<Article>> {
         return try {
             // TODO: 20/05/21 check response status
-            val articles = apiService.getTopNews().body()?.articles.orEmpty()
+            val articles = apiService.getTopNews().articles
             Response.Success(articles)
         } catch (e: Exception) {
             Response.Error(e)

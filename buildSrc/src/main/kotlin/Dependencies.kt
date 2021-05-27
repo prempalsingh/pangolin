@@ -6,6 +6,7 @@ object deps {
         private const val version = "1.5.0"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$version"
+        const val coroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
     }
 
     object androidx {
@@ -36,6 +37,8 @@ object deps {
         }
 
         const val jUnit = "junit:junit:4.13"
+        const val mockk = "io.mockk:mockk:1.11.0"
+        const val truth = "com.google.truth:truth:1.1.2"
     }
 
     const val contour = "app.cash.contour:contour:1.1.0"

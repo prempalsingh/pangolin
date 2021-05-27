@@ -68,6 +68,10 @@ dependencies {
     implementation(deps.network.moshiConverter)
 
     testImplementation(deps.test.jUnit)
+    testImplementation(deps.test.mockk)
+    testImplementation(deps.test.truth)
+    testImplementation(deps.kotlin.coroutinesTest)
+
     androidTestImplementation(deps.test.android.jUnitExt)
     androidTestImplementation(deps.test.android.espressoCore)
 }

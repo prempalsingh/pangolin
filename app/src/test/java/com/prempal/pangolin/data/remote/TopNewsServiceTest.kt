@@ -8,17 +8,25 @@ import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
+import org.junit.Before
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
 class TopNewsServiceTest {
 
+    private lateinit var apiService: ApiService
+    private lateinit var topNewsService: TopNewsService
+
+    @Before
+    fun setup() {
+        apiService = mockk()
+        topNewsService = TopNewsService(apiService)
+    }
+
     @Test
     fun fetchNewsArticlesSuccess() {
-        val apiService = mockk<ApiService>()
         val newsResponse = NewsResponse(emptyList(), "", 0)
         coEvery { apiService.getTopNews() } returns newsResponse
-        val topNewsService = TopNewsService(apiService)
 
         runBlockingTest {
             val response = topNewsService.fetchNewsArticles()
@@ -29,10 +37,8 @@ class TopNewsServiceTest {
 
     @Test
     fun fetchNewsArticlesFails() {
-        val apiService = mockk<ApiService>()
         val exceptionToThrow = Exception()
         coEvery { apiService.getTopNews() } throws exceptionToThrow
-        val topNewsService = TopNewsService(apiService)
 
         runBlockingTest {
             val response = topNewsService.fetchNewsArticles()

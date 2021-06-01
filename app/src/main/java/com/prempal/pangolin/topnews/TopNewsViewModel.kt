@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.prempal.pangolin.data.NewsRepository
-import com.prempal.pangolin.data.Response
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -27,11 +26,12 @@ class TopNewsViewModel @Inject constructor(private val repo: NewsRepository) : V
     private fun fetchNewsArticles() {
         viewModelScope.launch {
             _state.value = TopNewsViewState.Loading
-            val response = repo.fetchNewsArticles()
-            _state.value = when (response) {
-                is Response.Success -> TopNewsViewState.Success(response.data)
-                is Response.Error -> TopNewsViewState.Error(response.error)
-            }
+            val result = repo.fetchNewsArticles()
+            result.fold({
+                _state.value = TopNewsViewState.Success(it)
+            }, {
+                _state.value = TopNewsViewState.Error(it)
+            })
         }
     }
 }

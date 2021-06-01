@@ -1,7 +1,6 @@
 package com.prempal.pangolin.data.remote
 
 import com.google.common.truth.Truth.assertThat
-import com.prempal.pangolin.data.Response
 import com.prempal.pangolin.data.remote.api.ApiService
 import com.prempal.pangolin.data.remote.model.NewsResponse
 import io.mockk.coEvery
@@ -29,9 +28,9 @@ class TopNewsServiceTest {
         coEvery { apiService.getTopNews() } returns newsResponse
 
         runBlockingTest {
-            val response = topNewsService.fetchNewsArticles()
-            assertThat(response is Response.Success).isTrue()
-            assertThat((response as Response.Success).data).isEqualTo(newsResponse.articles)
+            val result = topNewsService.fetchNewsArticles()
+            assertThat(result.isSuccess).isTrue()
+            assertThat(result.getOrThrow()).isEqualTo(newsResponse.articles)
         }
     }
 
@@ -41,9 +40,9 @@ class TopNewsServiceTest {
         coEvery { apiService.getTopNews() } throws exceptionToThrow
 
         runBlockingTest {
-            val response = topNewsService.fetchNewsArticles()
-            assertThat(response is Response.Error).isTrue()
-            assertThat((response as Response.Error).error).isEqualTo(exceptionToThrow)
+            val result = topNewsService.fetchNewsArticles()
+            assertThat(result.isFailure).isTrue()
+            assertThat((result.exceptionOrNull())).isEqualTo(exceptionToThrow)
         }
     }
 }

@@ -27,11 +27,14 @@ class TopNewsViewModel @Inject constructor(private val repo: NewsRepository) : V
         viewModelScope.launch {
             _state.value = TopNewsViewState.Loading
             val result = repo.fetchNewsArticles()
-            result.fold({
-                _state.value = TopNewsViewState.Success(it)
-            }, {
-                _state.value = TopNewsViewState.Error(it)
-            })
+            result.fold(
+                {
+                    _state.value = TopNewsViewState.Success(it)
+                },
+                {
+                    _state.value = TopNewsViewState.Error(it)
+                }
+            )
         }
     }
 }

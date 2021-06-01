@@ -4,11 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.Button
 import android.widget.ProgressBar
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.prempal.pangolin.R
-import com.prempal.pangolin.utils.visibleIf
 import com.squareup.contour.ContourLayout
 
 @SuppressLint("ViewConstructor")
@@ -45,9 +45,9 @@ class TopNewsView(context: Context, onRetryClick: () -> Unit) : ContourLayout(co
     }
 
     fun setLayoutState(state: TopNewsViewState) {
-        progressBar.visibleIf(state is TopNewsViewState.Loading)
-        errorButton.visibleIf(state is TopNewsViewState.Error)
-        topNewsListView.visibleIf(state is TopNewsViewState.Success)
+        progressBar.isVisible = state is TopNewsViewState.Loading
+        errorButton.isVisible = state is TopNewsViewState.Error
+        topNewsListView.isVisible = state is TopNewsViewState.Success
 
         if (state is TopNewsViewState.Success) {
             topNewsAdapter.articles = state.articles

@@ -19,9 +19,7 @@ class TopNewsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        topNewsView = TopNewsView(requireContext()) {
-            viewModel.retryClicked()
-        }
+        topNewsView = TopNewsView(requireContext())
         return topNewsView
     }
 
@@ -32,8 +30,8 @@ class TopNewsFragment : Fragment() {
     }
 
     private fun subscribeToViewModel() {
-        viewModel.state.observe(viewLifecycleOwner) {
-            topNewsView.setLayoutState(it)
+        viewModel.articles.observe(viewLifecycleOwner) {
+            topNewsView.setPagingData(viewLifecycleOwner.lifecycle, it)
         }
     }
 }

@@ -60,6 +60,7 @@ dependencies {
     implementation(deps.contour)
     implementation(deps.androidx.navigationFragment)
     implementation(deps.androidx.navigationUi)
+    implementation(deps.androidx.paging)
 
     implementation(deps.hilt.android)
     kapt(deps.hilt.compiler)

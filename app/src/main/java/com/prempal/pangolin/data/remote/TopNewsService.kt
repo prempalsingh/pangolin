@@ -1,20 +1,24 @@
 package com.prempal.pangolin.data.remote
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.prempal.pangolin.data.NewsRepository
 import com.prempal.pangolin.data.remote.api.ApiService
 import com.prempal.pangolin.data.remote.model.Article
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class TopNewsService @Inject constructor(
     private val apiService: ApiService
 ) : NewsRepository {
-    override suspend fun fetchNewsArticles(): Result<List<Article>> {
-        return try {
-            // TODO: 20/05/21 check response status
-            val articles = apiService.getTopNews().articles
-            Result.success(articles)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+    override fun fetchNewsArticles(): Flow<PagingData<Article>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { NewsPagingSource(apiService) }
+        ).flow
     }
 }

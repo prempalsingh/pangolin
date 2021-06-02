@@ -15,6 +15,7 @@ object deps {
         const val design = "com.google.android.material:material:1.3.0"
         const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:2.3.5"
         const val navigationUi = "androidx.navigation:navigation-ui-ktx:2.3.5"
+        const val paging = "androidx.paging:paging-runtime:3.0.0"
     }
 
     object hilt {

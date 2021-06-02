@@ -31,22 +31,22 @@ class TopNewsViewModelTest {
 
     @Test
     fun fetchNewsArticlesSuccess() {
-        assertThat(viewModel.state.getOrAwaitValue()).isEqualTo(TopNewsViewState.Loading)
+        assertThat(viewModel.articles.getOrAwaitValue()).isEqualTo(TopNewsViewState.Loading)
 
         val articles = emptyList<Article>()
         repository.emitArticles(articles)
 
-        assertThat(viewModel.state.getOrAwaitValue()).isEqualTo(TopNewsViewState.Success(articles))
+        assertThat(viewModel.articles.getOrAwaitValue()).isEqualTo(TopNewsViewState.Success(articles))
     }
 
     @Test
     fun fetchNewsArticlesFails() {
-        assertThat(viewModel.state.getOrAwaitValue()).isEqualTo(TopNewsViewState.Loading)
+        assertThat(viewModel.articles.getOrAwaitValue()).isEqualTo(TopNewsViewState.Loading)
 
         val exceptionToThrow = Exception()
         repository.emitError(exceptionToThrow)
 
-        assertThat(viewModel.state.getOrAwaitValue())
+        assertThat(viewModel.articles.getOrAwaitValue())
             .isEqualTo(
                 TopNewsViewState.Error(exceptionToThrow)
             )
@@ -54,22 +54,22 @@ class TopNewsViewModelTest {
 
     @Test
     fun retryFetchNewsArticlesFailed() {
-        assertThat(viewModel.state.getOrAwaitValue()).isEqualTo(TopNewsViewState.Loading)
+        assertThat(viewModel.articles.getOrAwaitValue()).isEqualTo(TopNewsViewState.Loading)
 
         val articles = emptyList<Article>()
         val exceptionToThrow = Exception()
 
         repository.emitError(exceptionToThrow)
-        assertThat(viewModel.state.getOrAwaitValue())
+        assertThat(viewModel.articles.getOrAwaitValue())
             .isEqualTo(
                 TopNewsViewState.Error(exceptionToThrow)
             )
 
         viewModel.retryClicked()
 
-        assertThat(viewModel.state.getOrAwaitValue()).isEqualTo(TopNewsViewState.Loading)
+        assertThat(viewModel.articles.getOrAwaitValue()).isEqualTo(TopNewsViewState.Loading)
 
         repository.emitArticles(articles)
-        assertThat(viewModel.state.getOrAwaitValue()).isEqualTo(TopNewsViewState.Success(articles))
+        assertThat(viewModel.articles.getOrAwaitValue()).isEqualTo(TopNewsViewState.Success(articles))
     }
 }

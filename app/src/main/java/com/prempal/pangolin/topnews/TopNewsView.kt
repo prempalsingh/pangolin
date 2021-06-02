@@ -5,14 +5,20 @@ import android.content.Context
 import android.widget.Button
 import android.widget.ProgressBar
 import androidx.core.view.isVisible
+import androidx.lifecycle.Lifecycle
+import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.prempal.pangolin.R
+import com.prempal.pangolin.data.remote.model.Article
 import com.squareup.contour.ContourLayout
 
 @SuppressLint("ViewConstructor")
-class TopNewsView(context: Context, onRetryClick: () -> Unit) : ContourLayout(context) {
+class TopNewsView(
+    context: Context
+) : ContourLayout(context) {
 
     private val progressBar = ProgressBar(context)
     private val errorButton = Button(context).apply {
@@ -23,6 +29,7 @@ class TopNewsView(context: Context, onRetryClick: () -> Unit) : ContourLayout(co
         layoutManager = LinearLayoutManager(context)
         addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         adapter = topNewsAdapter
+            .withLoadStateFooter(NewsLoadStateAdapter { topNewsAdapter.retry() })
     }
 
     init {
@@ -40,17 +47,17 @@ class TopNewsView(context: Context, onRetryClick: () -> Unit) : ContourLayout(co
         )
 
         errorButton.setOnClickListener {
-            onRetryClick()
+            topNewsAdapter.retry()
+        }
+
+        topNewsAdapter.addLoadStateListener {
+            topNewsListView.isVisible = it.source.refresh is LoadState.NotLoading
+            progressBar.isVisible = it.source.refresh is LoadState.Loading
+            errorButton.isVisible = it.source.refresh is LoadState.Error
         }
     }
 
-    fun setLayoutState(state: TopNewsViewState) {
-        progressBar.isVisible = state is TopNewsViewState.Loading
-        errorButton.isVisible = state is TopNewsViewState.Error
-        topNewsListView.isVisible = state is TopNewsViewState.Success
-
-        if (state is TopNewsViewState.Success) {
-            topNewsAdapter.articles = state.articles
-        }
+    fun setPagingData(lifecycle: Lifecycle, pagingData: PagingData<Article>) {
+        topNewsAdapter.submitData(lifecycle, pagingData)
     }
 }

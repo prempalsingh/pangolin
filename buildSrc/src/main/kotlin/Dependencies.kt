@@ -42,5 +42,11 @@ object deps {
         const val coreTesting = "androidx.arch.core:core-testing:2.1.0"
     }
 
+    object chucker {
+        private const val version = "3.4.0"
+        const val lib = "com.github.chuckerteam.chucker:library:$version"
+        const val libNoOp = "com.github.chuckerteam.chucker:library-no-op:$version"
+    }
+
     const val contour = "app.cash.contour:contour:1.1.0"
 }

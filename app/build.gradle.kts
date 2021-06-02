@@ -67,6 +67,9 @@ dependencies {
     implementation(deps.network.retrofit)
     implementation(deps.network.moshiConverter)
 
+    debugImplementation(deps.chucker.lib)
+    releaseImplementation(deps.chucker.libNoOp)
+
     testImplementation(deps.test.jUnit)
     testImplementation(deps.test.mockk)
     testImplementation(deps.test.truth)

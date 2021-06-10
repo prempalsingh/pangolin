@@ -1,3 +1,4 @@
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import java.io.FileInputStream
 import java.util.Properties
 
@@ -13,6 +14,7 @@ plugins {
     kotlin("kapt")
     id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
     id("dagger.hilt.android.plugin")
+    id("com.github.ben-manes.versions") version "0.39.0"
 }
 
 android {
@@ -79,4 +81,17 @@ dependencies {
 
     androidTestImplementation(deps.test.android.jUnitExt)
     androidTestImplementation(deps.test.android.espressoCore)
+}
+
+fun isNonStable(version: String): Boolean {
+    val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.toUpperCase().contains(it) }
+    val regex = "^[0-9,.v-]+(-r)?$".toRegex()
+    val isStable = stableKeyword || regex.matches(version)
+    return isStable.not()
+}
+
+tasks.withType<DependencyUpdatesTask> {
+    rejectVersionIf {
+        isNonStable(candidate.version) && !isNonStable(currentVersion)
+    }
 }

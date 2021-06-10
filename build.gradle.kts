@@ -8,7 +8,7 @@ buildscript {
         classpath(deps.agp)
         classpath(deps.kotlin.gradlePlugin)
         classpath(deps.hilt.gradlePlugin)
-
+        classpath(deps.androidx.navigationSafeArgsPlugin)
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle.kts files
     }

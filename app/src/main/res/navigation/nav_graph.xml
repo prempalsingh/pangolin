@@ -6,11 +6,22 @@
 
     <fragment
         android:id="@+id/top_dest"
-        android:name="com.prempal.pangolin.topnews.TopNewsFragment" />
+        android:name="com.prempal.pangolin.topnews.TopNewsFragment">
+        <action
+            android:id="@+id/action_top_dest_to_article_dest"
+            app:destination="@id/article_dest" />
+    </fragment>
     <fragment
         android:id="@+id/saved_dest"
         android:name="com.prempal.pangolin.SavedNewsFragment" />
     <fragment
         android:id="@+id/search_dest"
         android:name="com.prempal.pangolin.SearchNewsFragment" />
+    <fragment
+        android:id="@+id/article_dest"
+        android:name="com.prempal.pangolin.article.ArticleFragment">
+        <argument
+            android:name="article"
+            app:argType="com.prempal.pangolin.data.remote.model.Article" />
+    </fragment>
 </navigation>

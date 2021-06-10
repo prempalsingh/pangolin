@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.ProgressBar
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -54,6 +55,10 @@ class TopNewsView(
             topNewsListView.isVisible = it.source.refresh is LoadState.NotLoading
             progressBar.isVisible = it.source.refresh is LoadState.Loading
             errorButton.isVisible = it.source.refresh is LoadState.Error
+        }
+
+        topNewsAdapter.onItemClickListener = {
+            findNavController().navigate(TopNewsFragmentDirections.actionTopDestToArticleDest(it))
         }
     }
 

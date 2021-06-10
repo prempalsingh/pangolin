@@ -8,6 +8,8 @@ import com.prempal.pangolin.data.remote.model.Article
 
 class NewsAdapter : PagingDataAdapter<Article, NewsAdapter.NewsItemViewHolder>(ARTICLE_COMPARATOR) {
 
+    var onItemClickListener: ((Article) -> Unit)? = null
+
     companion object {
         private val ARTICLE_COMPARATOR = object : DiffUtil.ItemCallback<Article>() {
             override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
@@ -29,8 +31,17 @@ class NewsAdapter : PagingDataAdapter<Article, NewsAdapter.NewsItemViewHolder>(A
         holder.bindArticle(article!!)
     }
 
-    class NewsItemViewHolder(private val newsItemView: NewsItemView) :
+    inner class NewsItemViewHolder(private val newsItemView: NewsItemView) :
         RecyclerView.ViewHolder(newsItemView) {
+
+        init {
+            newsItemView.setOnClickListener {
+                val article = getItem(bindingAdapterPosition)
+                article?.let {
+                    onItemClickListener?.invoke(it)
+                }
+            }
+        }
 
         fun bindArticle(article: Article) {
             newsItemView.bindArticle(article)

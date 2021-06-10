@@ -12,6 +12,8 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
+    id("kotlin-parcelize")
+    id("androidx.navigation.safeargs.kotlin")
     id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
     id("dagger.hilt.android.plugin")
     id("com.github.ben-manes.versions") version "0.39.0"

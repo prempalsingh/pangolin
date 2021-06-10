@@ -1,7 +1,10 @@
 package com.prempal.pangolin.data.remote.model
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Article(
     @Json(name = "author")
     val author: String,
@@ -17,4 +20,4 @@ data class Article(
     val url: String,
     @Json(name = "urlToImage")
     val urlToImage: String
-)
+) : Parcelable
